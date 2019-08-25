@@ -44,7 +44,7 @@ steps_per_day.0 <- as.data.frame(steps_per_day.0)
 ``` 
 The histograph showing the total numbers of steps taken per day is shown below.
 
-```{r}
+```{r number_of_steps_per_day}
 require(ggplot2)
 ggplot(steps_per_day.0, aes(x=steps)) + 
   geom_histogram(fill="green") +
@@ -77,7 +77,7 @@ time_series <- as.data.frame(time_series)
 
 Then, a time series plot is drawn below.
 
-```{r}
+```{r average_steps_per_interval}
 ggplot(time_series, aes(time_series$interval, time_series$int_mean)) + 
     geom_line() +
     labs(title="Average Steps per Interval", x="Interval", y="Average number of steps")
@@ -113,7 +113,7 @@ filled_data <- arrange(select(m, steps, date, interval), date)
 
 We redraw the histogram with the total number of steps per day and calculate the mean and median.
 
-```{r}
+```{r number_of_steps_per_day_filled}
 steps_per_day.1 <- filled_data %>% group_by(date) %>% summarize(steps=sum(steps))
 steps_per_day.1 <- as.data.frame(steps_per_day.1)
 ggplot(steps_per_day.0, aes(x=steps)) + 
@@ -147,9 +147,10 @@ w_series <- as.data.frame(w_series)
 Now we draw a time series plot of the 5-minute interval and the average number of steps taken, averaged across all weekday days or weekend days.
 
 
-```{r}
+```{r average_steps_per_interval_across_weekdays}
 ggplot(w_series, aes(w_series$interval, w_series$w_mean)) + 
   geom_line(colour="blue") + facet_grid(day ~ .) + 
   theme(strip.background = element_rect(fill="#FFCC66")) +
   labs(title="Average Steps per Interval", x="Interval", y="Number of steps")
 ```
+
